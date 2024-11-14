@@ -1,0 +1,219 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Svensk koncernstruktur med historik",
+  "type": "object",
+  "additionalProperties": false,
+  "definitions": {
+    "period": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["startDatum"],
+      "properties": {
+        "startDatum": { 
+          "type": "string"
+        },
+        "slutDatum": { 
+          "type": "string"
+        }
+      }
+    },
+    "historikPost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["period", "orsak"],
+      "properties": {
+        "period": { 
+          "$ref": "#/definitions/period"
+        },
+        "orsak": {
+          "type": "string"
+        },
+        "kommentar": {
+          "type": "string"
+        }
+      }
+    },
+    "associationsform": {
+      "type": "string",
+      "enum": [
+        "AB",
+        "EK",
+        "HB",
+        "KB",
+        "E",
+        "BRF",
+        "STI",
+        "IDE",
+        "UTL",
+        "ÖVRIGA"
+      ],
+      "description": "AB=Aktiebolag, EK=Ekonomisk förening, HB=Handelsbolag, KB=Kommanditbolag, E=Enskild näringsverksamhet, BRF=Bostadsrättsförening, STI=Stiftelse, IDE=Ideell förening, UTL=Utländsk juridisk person"
+    },
+    "verksamhetsstatus": {
+      "type": "string",
+      "enum": [
+        "AKTIV",
+        "VILANDE",
+        "UNDER_LIKVIDATION",
+        "LIKVIDERAD",
+        "KONKURS",
+        "FUSIONERAD",
+        "AVREGISTRERAD"
+      ]
+    }
+  },
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "skapadDatum": { "type": "string" },
+        "senastUppdaterad": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "koncernenheter": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "enhetsId", 
+          "organisationsNummer", 
+          "enhetsInfo", 
+          "associationsform",
+          "status"
+        ],
+        "properties": {
+          "enhetsId": { 
+            "type": "string"
+          },
+          "organisationsNummer": {
+            "type": "string"
+          },
+          "enhetsInfo": { 
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["nuvarandeNamn"],
+            "properties": {
+              "nuvarandeNamn": { 
+                "type": "string" 
+              },
+              "kortNamn": { 
+                "type": "string",
+                "description": "Informellt eller förkortat namn"
+              },
+              "namnHistorik": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["period", "namn", "ändringstyp"],
+                  "properties": {
+                    "period": {
+                      "$ref": "#/definitions/period"
+                    },
+                    "namn": { 
+                      "type": "string" 
+                    },
+                    "ändringstyp": {
+                      "type": "string",
+                      "enum": [
+                        "NAMNBYTE",
+                        "FUSION",
+                        "UPPKÖP",
+                        "OMBILDNING",
+                        "ÖVRIGT"
+                      ]
+                    },
+                    "kommentar": { 
+                      "type": "string" 
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "associationsform": {
+            "$ref": "#/definitions/associationsform"
+          },
+          "status": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["nuvarande"],
+            "properties": {
+              "nuvarande": {
+                "$ref": "#/definitions/verksamhetsstatus"
+              },
+              "statusHistorik": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["period", "status"],
+                  "properties": {
+                    "period": {
+                      "$ref": "#/definitions/period"
+                    },
+                    "status": {
+                      "$ref": "#/definitions/verksamhetsstatus"
+                    },
+                    "kommentar": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ägarförhållanden": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ägareId", "ägdEnhetId"],
+        "properties": {
+          "ägareId": { 
+            "type": "string" 
+          },
+          "ägdEnhetId": { 
+            "type": "string" 
+          },
+          "ägandeHistorik": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["period", "andelar"],
+              "properties": {
+                "period": {
+                  "$ref": "#/definitions/period"
+                },
+                "andelar": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kapital", "röster"],
+                  "properties": {
+                    "kapital": { 
+                      "type": "number"
+                    },
+                    "röster": { 
+                      "type": "number"
+                    }
+                  }
+                },
+
+                "kommentar": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

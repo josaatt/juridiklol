@@ -1,0 +1,136 @@
+{
+  "metadata": {
+    "skapadDatum": "2024-01-15",
+    "senastUppdaterad": "2024-01-15",
+    "version": "1.0"
+  },
+  "koncernenheter": [
+    {
+      "enhetsId": "parent-1",
+      "organisationsNummer": "556789-1234",
+      "enhetsInfo": {
+        "nuvarandeNamn": "Exempel Holding AB",
+        "kortNamn": "EHAB",
+        "namnHistorik": [
+          {
+            "period": {
+              "startDatum": "1990-01-01",
+              "slutDatum": "2010-12-31"
+            },
+            "namn": "Gamla Exempel AB",
+            "ändringstyp": "NAMNBYTE",
+            "kommentar": "Namnbyte i samband med ny koncernstrategi"
+          }
+        ]
+      },
+      "associationsform": "AB",
+      "status": {
+        "nuvarande": "AKTIV"
+      }
+    },
+    {
+      "enhetsId": "sub-1",
+      "organisationsNummer": "556123-4567",
+      "enhetsInfo": {
+        "nuvarandeNamn": "Exempel Produktion AB",
+        "kortNamn": "EPAB"
+      },
+      "associationsform": "AB",
+      "status": {
+        "nuvarande": "AKTIV"
+      }
+    },
+    {
+      "enhetsId": "sub-2",
+      "organisationsNummer": "556234-5678",
+      "enhetsInfo": {
+        "nuvarandeNamn": "Exempel Trading AB",
+        "kortNamn": "ETAB",
+        "namnHistorik": [
+          {
+            "period": {
+              "startDatum": "2015-01-01",
+              "slutDatum": "2015-12-31"
+            },
+            "namn": "Handelsbolaget Syd AB",
+            "ändringstyp": "UPPKÖP",
+            "kommentar": "Uppköp och namnbyte"
+          }
+        ]
+      },
+      "associationsform": "AB",
+      "status": {
+        "nuvarande": "AKTIV",
+        "statusHistorik": [
+          {
+            "period": {
+              "startDatum": "2015-01-01",
+              "slutDatum": "2015-06-30"
+            },
+            "status": "UNDER_LIKVIDATION",
+            "kommentar": "Tillfällig likvidation under uppköpsprocess"
+          }
+        ]
+      }
+    },
+    {
+      "enhetsId": "sub-3",
+      "organisationsNummer": "556345-6789",
+      "enhetsInfo": {
+        "nuvarandeNamn": "Exempel International Ltd",
+        "kortNamn": "EIL"
+      },
+      "associationsform": "UTL",
+      "status": {
+        "nuvarande": "AKTIV"
+      }
+    }
+  ],
+  "ägarförhållanden": [
+    {
+      "ägareId": "parent-1",
+      "ägdEnhetId": "sub-1",
+      "ägandeHistorik": [
+        {
+          "period": {
+            "startDatum": "2010-01-01"
+          },
+          "andelar": {
+            "kapital": 100,
+            "röster": 100
+          }
+        }
+      ]
+    },
+    {
+      "ägareId": "parent-1",
+      "ägdEnhetId": "sub-2",
+      "ägandeHistorik": [
+        {
+          "period": {
+            "startDatum": "2015-01-01"
+          },
+          "andelar": {
+            "kapital": 75,
+            "röster": 80
+          }
+        }
+      ]
+    },
+    {
+      "ägareId": "parent-1",
+      "ägdEnhetId": "sub-3",
+      "ägandeHistorik": [
+        {
+          "period": {
+            "startDatum": "2018-01-01"
+          },
+          "andelar": {
+            "kapital": 100,
+            "röster": 100
+          }
+        }
+      ]
+    }
+  ]
+}
